@@ -1,0 +1,42 @@
+body {
+	padding: 3em 1em;
+	font-size: 120%;
+	font-family: Helvetica, sans-serif;
+	color: #6e6e6e;
+	background-color: white;
+	text-align: center;
+}
+p {
+	margin: 0;
+	line-height: 1.45em;
+}
+a {
+	color: #008eee;
+	text-decoration: none;
+}
+a:hover {
+	color: #00aeee;
+}
+ul {
+	padding-left: 0;
+	list-style: none;
+}
+ul#links li {
+	display: inline-block;
+	margin: 0 .3em;
+}
+#profile {
+	margin-bottom: 2em;
+	width: 200px;
+	height: 200px;
+	border-radius: 100px;
+}
+#about {
+	margin-bottom: 1em;
+}
+#projects p {
+	margin: .6em;
+}
+#projects a {
+	margin: .6em;
+}
