@@ -54,6 +54,7 @@ ul#links li {
 }
 footer {
 	margin-top: 2em;
+	margin-bottom: 1em;
 }
 footer > a {
 	margin: 0 1em;
