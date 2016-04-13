@@ -1,8 +1,10 @@
 var repos = '';
 var etag = localStorage.getItem('etag');
 
+var account = 'pepebecker';
+
 var request = {
-	url          : 'https://api.github.com/users/pepebecker/repos',
+	url          : `https://api.github.com/users/${account}/repos`,
 	method       : 'HEAD'
 }
 
@@ -18,7 +20,7 @@ minixhr(request, function (data, response, xhr, header) {
 });
 
 function fetchRepos() {
-	minixhr('https://api.github.com/users/pepeapps/repos', function (data, response, xhr, header) {
+	minixhr(`https://api.github.com/users/${account}/repos`, function (data, response, xhr, header) {
 		localStorage.setItem('repos', data, null, 4);
 		repos = JSON.parse(data);
 		showRepos();
@@ -35,7 +37,7 @@ function showRepos() {
 		var url = repos[i].html_url;
 		var description = (repos[i].description.length>0)?repos[i].description:'no description available';
 
-		if (repos[i].name === 'pepeapps.github.io')
+		if (repos[i].name === `${account}.github.io`)
 			description = 'This repo contains the source of this site';
 
 		content += `<li class="repo"><a href="${url}">${name}</a><p class="discription">${description}</p></li>\n`;
