@@ -2,7 +2,7 @@ var repos = '';
 var etag = localStorage.getItem('etag');
 
 var request = {
-	url          : 'https://api.github.com/users/pepeapps/repos',
+	url          : 'https://api.github.com/users/pepebecker/repos',
 	method       : 'HEAD'
 }
 
