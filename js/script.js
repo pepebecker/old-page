@@ -80,8 +80,10 @@ function showRepos (repos) {
 		} else {
 			console.log('Requesting repos from server')
 			getRepos(function (repos) {
-				localStorage.setItem('repos', repos)
-				showRepos(repos)
+				if (JSON.parse(repos)) {
+					localStorage.setItem('repos', repos)
+					showRepos(repos)
+				}
 			})
 		}
 	})
