@@ -91,9 +91,7 @@ footer {
 }
 
 /* ----------- iPhone 5 and 5S ----------- */
-
-/* Portrait and Landscape */
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 568px) {
     .repo > .name {
       margin-top: 0;
     }
