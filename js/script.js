@@ -1,4 +1,4 @@
-var xhr = (method, url, callback) => {
+var xhr = function (method, url, callback) {
   var xhr = new XMLHttpRequest()
   xhr.open(method, url, true)
   xhr.onreadystatechange = function() {
@@ -11,54 +11,69 @@ var xhr = (method, url, callback) => {
   xhr.send()
 }
 
-var checkIfUpToDate = (callback) => {
-  xhr('HEAD', 'https://api.github.com/users/pepebecker/repos', (response) => {
+var domain = 'https://api.github.com/users/pepebecker/repos'
+var client_id = 'a5bd048689d32854df86'
+var client_secret = '1c1d268c1f65b2322b1c6be1760d606c52b654a9'
+var url = domain + '?client_id=' + client_id + '&client_secret=' + client_secret
+
+function checkIfUpToDate (callback) {
+  xhr('HEAD', url, function (response) {
     if (response.getResponseHeader('etag') === localStorage.getItem('etag')) {
       callback(true)
     } else {
+      localStorage.setItem('etag', response.getResponseHeader('etag'))
       callback(false)
     }
   })
 }
 
-var getRepos = (callback) => {
-  xhr('GET', 'https://api.github.com/users/pepebecker/repos', (response) => {
+function getRepos (callback) {
+  xhr('GET', url, function (response) {
     callback(response.responseText)
   })
 }
 
-var showRepos = (repos) => {
+function showRepos (repos) {
   repos = JSON.parse(repos)
-  var content = '<p>My GitHub Reposetories</p>\n';
+  var content = ''
+  // content += '<p>My GitHub Reposetories</p>';
   for (var i = 0; i < repos.length; i++) {
-    var name = repos[i].name;
-    var url = repos[i].html_url;
-    var description = 'no description available';
+    var name = repos[i].name.replace('-', ' ')
+    var url = repos[i].html_url
+    var description = 'no description available'
     if (repos[i].description !== null) {
+      if (repos[i].name === 'pepebecker.github.io') {
+        continue
+      }
       if (repos[i].description.length > 0) {
-        description = repos[i].description;
+        description = repos[i].description
       } else {
-        description = 'no description available';
+        description = 'no description available'
       }
     }
-    if (repos[i].name === ('pepebecker.github.io')) {
-      description = 'This repo contains the source of this site';
-    }
-    content += "<li class='repo'><a href='" + url + "'>" + name + "</a><p class='discription'>" + description + "</p></li>\n";
+    content += '<a class=repo href=' + url + ' target=_blank>'
+    content += '  <p class=name>'
+    content +=      name
+    content += '  </p>'
+    content += '  <p class=description>'
+    content +=      description
+    content += '  </p>'
+    content += '</a>'
   }
-  return document.getElementById("repos").innerHTML = content;
+  return document.getElementById("repos").innerHTML = content
 }
 
-(() => {
-  checkIfUpToDate((up2date) => {
+(function () {
+  showRepos(localStorage.getItem('repos'))
+  checkIfUpToDate(function (up2date) {
     if (up2date) {
       console.log('Everything is up to date')
       var repos = localStorage.getItem('repos')
       showRepos(repos)
     } else {
       console.log('Requesting repos from server')
-      getRepos((repos) => {
-        localStorage.setItem('repos', repos, null, 4)
+      getRepos(function (repos) {
+        localStorage.setItem('repos', repos)
         showRepos(repos)
       })
     }
