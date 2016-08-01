@@ -18,7 +18,7 @@ var url = domain + '?client_id=' + client_id + '&client_secret=' + client_secret
 
 function checkIfUpToDate (callback) {
 	xhr('HEAD', url, function (response) {
-		if (response.getResponseHeader('etag') === localStorage.getItem('etag')) {
+		if (response.getResponseHeader('etag') === localStorage.getItem('etag') && localStorage.getItem('repos').length > 0) {
 			callback(true)
 		} else {
 			localStorage.setItem('etag', response.getResponseHeader('etag'))
@@ -39,25 +39,39 @@ function showRepos (repos) {
 
 	var modimes = {
 		name: 'Mo Dimes Music',
-		description: 'Mo Dimes Music Official Website<br>(Homepage from my Father)',
-		html_url: 'https://github.com/modimes/modimes.github.io'
+		description: 'Mo Dimes Music Official Website',
+		html_url: 'http://modimesmusic.com/'
 	}
 	repos.push(modimes)
 
+	var ibreed = {
+		name: 'iBreed Dogs',
+		description: 'iBreed puts your Kennel in your pocket<br>Available on the App Store',
+		html_url: 'https://itunes.apple.com/us/app/ibreed-dogs/id1046382842?ls=1&mt=8'
+	}
+	repos.push(ibreed)
+
 	for (var i = 0; i < repos.length; i++) {
-		var name = repos[i].name.replace('-', ' ')
-		var url = repos[i].html_url
-		var description = 'no description available'
-		if (repos[i].description !== null) {
-			if (repos[i].name === 'pepebecker.github.io') {
-				continue
-			}
-			if (repos[i].description.length > 0) {
-				description = repos[i].description
-			} else {
-				description = 'no description available'
-			}
+		var name, url, description
+
+		name = repos[i].name.replace('-', ' ').toUpperCase()
+		url = repos[i].html_url
+
+		if (repos[i].description !== null && repos[i].description.length > 0) {
+			description = repos[i].description
+		} else {
+			description = 'no description available'
 		}
+
+		if (repos[i].name === 'pepebecker.github.io') {
+			name = 'THIS WEBSITE'
+			description = 'This reposetory contains the source code of this website'
+		}
+
+		if (repos[i].name === 'iBreed Dogs') {
+			name = 'iBREED DOGS'
+		}
+
 		content += '<a class=repo href=' + url + ' target=_blank>'
 		content += '  <p class=name>'
 		content +=      name
