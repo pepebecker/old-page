@@ -35,6 +35,11 @@ function getRepos (callback) {
 
 function showRepos (repos) {
 	repos = JSON.parse(repos)
+
+	if (repos === null) {
+		return;
+	}
+
 	var content = ''
 
 	var modimes = {
