@@ -70,7 +70,7 @@ function showRepos (repos) {
 
 		if (repos[i].name === 'pepebecker.github.io') {
 			name = 'THIS WEBSITE'
-			description = 'This reposetory contains the source code of this website'
+			description = 'This repository contains the source code of this website'
 		}
 
 		if (repos[i].name === 'iBreed Dogs') {
