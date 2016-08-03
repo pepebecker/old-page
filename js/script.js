@@ -1,11 +1,9 @@
-var xhr = function (method, url, callback) {
+var xhr = function (method, url, callback, async = true) {
 	var xhr = new XMLHttpRequest()
-	xhr.open(method, url, true)
+	xhr.open(method, url, async)
 	xhr.onreadystatechange = function() {
 		if (this.readyState === this.DONE) {
-			if (this.status !== 404) {
-				callback(this)
-			}
+			callback(this)
 		}
 	}
 	xhr.send()
@@ -18,18 +16,22 @@ var url = domain + '?client_id=' + client_id + '&client_secret=' + client_secret
 
 function checkIfUpToDate (callback) {
 	xhr('HEAD', url, function (response) {
-		if (response.getResponseHeader('etag') === localStorage.getItem('etag') && localStorage.getItem('repos').length > 0) {
-			callback(true)
-		} else {
-			localStorage.setItem('etag', response.getResponseHeader('etag'))
-			callback(false)
+		if (response.status !== 404) {
+			if (response.getResponseHeader('etag') === localStorage.getItem('etag') && localStorage.getItem('repos').length > 0) {
+				callback(true)
+			} else {
+				localStorage.setItem('etag', response.getResponseHeader('etag'))
+				callback(false)
+			}
 		}
 	})
 }
 
 function getRepos (callback) {
 	xhr('GET', url, function (response) {
-		callback(response.responseText)
+		if (response.status !== 404) {
+			callback(response.responseText)
+		}
 	})
 }
 
@@ -60,7 +62,17 @@ function showRepos (repos) {
 		var name, url, description
 
 		name = repos[i].name.replace('-', ' ').toUpperCase()
-		url = repos[i].html_url
+		// url = repos[i].html_url
+		url = 'http://pepebecker.com/' + repos[i].name
+
+		xhr('HEAD', url, function (response) {
+			if (response.status === 404) {
+				console.log(1)
+				url = repos[i].html_url
+			}
+		}, false)
+
+		console.log(2)
 
 		if (repos[i].description !== null && repos[i].description.length > 0) {
 			description = repos[i].description
