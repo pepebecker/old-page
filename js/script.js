@@ -67,12 +67,9 @@ function showRepos (repos) {
 
 		xhr('HEAD', url, function (response) {
 			if (response.status === 404) {
-				console.log(1)
 				url = repos[i].html_url
 			}
 		}, false)
-
-		console.log(2)
 
 		if (repos[i].description !== null && repos[i].description.length > 0) {
 			description = repos[i].description
