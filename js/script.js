@@ -1,3 +1,25 @@
+var pages = [
+  {
+		"name": "MO DIMES MUSIC",
+		"description": "Mo Dimes Music Official Website",
+		"html_url": "http://modimesmusic.com/"
+	},
+  {
+		"name": "iBREED DOGS",
+		"description": "iBreed puts your Kennel in your pocket<br>Available on the App Store",
+		"html_url": "https://itunes.apple.com/us/app/ibreed-dogs/id1046382842?ls=1&mt=8"
+	},
+  {
+    "key": "pepebecker.github.io",
+		"name": "This Website",
+		"description": "This repository contains the source code of this website",
+	},
+  {
+    "key": "car-game",
+		"html_url": "http://pepebecker.com/car-game/"
+	}
+]
+
 var xhr = function (method, url, callback, async = true) {
 	var xhr = new XMLHttpRequest()
 	xhr.open(method, url, async)
@@ -35,67 +57,49 @@ function getRepos (callback) {
 	})
 }
 
+function buildRepo(name, html_url, description) {
+	var content = ''
+	content += '<a class=repo href=' + html_url + ' target=_blank>'
+	content += '  <p class=name>'
+	content +=      name
+	content += '  </p>'
+	content += '  <p class=description>'
+	content +=      description
+	content += '  </p>'
+	content += '</a>'
+	return content
+}
+
 function showRepos (repos) {
 	repos = JSON.parse(repos)
 
-	if (repos === null) {
-		return;
-	}
+	if (!repos) return
 
 	var content = ''
 
-	var modimes = {
-		name: 'Mo Dimes Music',
-		description: 'Mo Dimes Music Official Website',
-		html_url: 'http://modimesmusic.com/'
-	}
-	repos.push(modimes)
-
-	var ibreed = {
-		name: 'iBreed Dogs',
-		description: 'iBreed puts your Kennel in your pocket<br>Available on the App Store',
-		html_url: 'https://itunes.apple.com/us/app/ibreed-dogs/id1046382842?ls=1&mt=8'
-	}
-	repos.push(ibreed)
-
 	for (var i = 0; i < repos.length; i++) {
-		var name, url, description
+		var repo = repos[i]
 
-		name = repos[i].name.replace('-', ' ').toUpperCase()
-		// url = repos[i].html_url
-		url = 'http://pepebecker.com/' + repos[i].name
-
-		xhr('HEAD', url, function (response) {
-			if (response.status === 404) {
-				url = repos[i].html_url
+		for (var j = 0; j < pages.length; j++) {
+			if (pages[j].key === repo.name) {
+				Object.assign(repo, pages[j])
+				continue
 			}
-		}, false)
-
-		if (repos[i].description !== null && repos[i].description.length > 0) {
-			description = repos[i].description
-		} else {
-			description = 'no description available'
 		}
 
-		if (repos[i].name === 'pepebecker.github.io') {
-			name = 'THIS WEBSITE'
-			description = 'This repository contains the source code of this website'
-		}
+		repo.name = repo.name.replace('-', ' ').toUpperCase()
+		repo.description = repo.description || 'no description available'
 
-		if (repos[i].name === 'iBreed Dogs') {
-			name = 'iBREED DOGS'
-		}
-
-		content += '<a class=repo href=' + url + ' target=_blank>'
-		content += '  <p class=name>'
-		content +=      name
-		content += '  </p>'
-		content += '  <p class=description>'
-		content +=      description
-		content += '  </p>'
-		content += '</a>'
+		content += buildRepo(repo.name, repo.html_url, repo.description)
 	}
-	return document.getElementById("repos").innerHTML = content
+
+	for (var i = 0; i < pages.length; i++) {
+		if (!pages[i].key) {
+			content += buildRepo(pages[i].name, pages[i].html_url, pages[i].description)
+		}
+	}
+
+	return document.querySelector("#repos").innerHTML = content
 }
 
 (function () {

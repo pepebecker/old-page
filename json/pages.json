@@ -1,0 +1,21 @@
+[
+  {
+		"name": "Mo Dimes Music",
+		"description": "Mo Dimes Music Official Website",
+		"html_url": "http://modimesmusic.com/"
+	},
+  {
+		"name": "iBreed Dogs",
+		"description": "iBreed puts your Kennel in your pocket<br>Available on the App Store",
+		"html_url": "https://itunes.apple.com/us/app/ibreed-dogs/id1046382842?ls=1&mt=8"
+	},
+  {
+    "repo": "pepebecker.github.io",
+		"name": "This Website",
+		"description": "This repository contains the source code of this website",
+	},
+  {
+    "repo": "car-game",
+		"html_url": "http://pepebecker.com/car-game/"
+	}
+]
