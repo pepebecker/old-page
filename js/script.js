@@ -1,21 +1,21 @@
 var pages = [
-  {
+	{
 		"name": "MO DIMES MUSIC",
 		"description": "Mo Dimes Music Official Website",
 		"html_url": "http://modimesmusic.com/"
 	},
-  {
+	{
 		"name": "iBREED DOGS",
 		"description": "iBreed puts your Kennel in your pocket<br>Available on the App Store",
 		"html_url": "https://itunes.apple.com/us/app/ibreed-dogs/id1046382842?ls=1&mt=8"
 	},
-  {
-    "key": "pepebecker.github.io",
+	{
+		"key": "pepebecker.github.io",
 		"name": "This Website",
 		"description": "This repository contains the source code of this website",
 	},
-  {
-    "key": "car-game",
+	{
+		"key": "car-game",
 		"html_url": "http://pepebecker.com/car-game/"
 	}
 ]
