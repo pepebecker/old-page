@@ -17,7 +17,7 @@ var pages = [
 	{
 		"key": "car-game",
 		"html_url": "http://pepebecker.com/car-game/"
-	}},
+	},
 	{
 		"key": "wizard-amigos",
 		"html_url": "http://pepebecker.com/wizard-amigos/"
