@@ -24,9 +24,9 @@ var pages = [
 	}
 ]
 
-var xhr = function (method, url, callback, async = true) {
+var xhr = function (method, url, callback) {
 	var xhr = new XMLHttpRequest()
-	xhr.open(method, url, async)
+	xhr.open(method, url, true)
 	xhr.onreadystatechange = function() {
 		if (this.readyState === this.DONE) {
 			callback(this)
