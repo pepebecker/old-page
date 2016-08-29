@@ -77,7 +77,7 @@ function populateProjects(repos, pages) {
 			if (host === 'localhost' || host === '127.0.0.1') {
 				url = 'http://localhost/~Pepe/' + repo.name
 			} else {
-				url = host + '/' + repo.name
+				url = '//' + host + '/' + repo.name
 			}
 		}
 
