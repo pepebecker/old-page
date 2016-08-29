@@ -12,12 +12,13 @@ var xhr = function (method, url, callback) {
 var domain = 'https://api.github.com/users/pepebecker/repos'
 var client_id = 'a5bd048689d32854df86'
 var client_secret = '1c1d268c1f65b2322b1c6be1760d606c52b654a9'
-var url = domain + '?client_id=' + client_id + '&client_secret=' + client_secret
+var extension = '?client_id=' + client_id + '&client_secret=' + client_secret
+var url = domain + extension
 
 function checkIfUpToDate (callback) {
 	xhr('HEAD', url, function (response) {
 		if (response.status !== 404) {
-			if (response.getResponseHeader('etag') === localStorage.getItem('etag') && localStorage.getItem('repos').length > 0) {
+			if (response.getResponseHeader('etag') === localStorage.getItem('etag') && localStorage.getItem('repos')) {
 				callback(true)
 			} else {
 				localStorage.setItem('etag', response.getResponseHeader('etag'))
@@ -30,14 +31,22 @@ function checkIfUpToDate (callback) {
 function getRepos (callback) {
 	xhr('GET', url, function (response) {
 		if (response.status !== 404) {
-			callback(response.responseText)
+			callback(JSON.parse(response.responseText))
 		}
 	})
 }
 
-function buildRepo(name, html_url, description) {
+function getPages (callback) {
+	xhr('GET', 'json/pages.json', function (response) {
+		if (response.status !== 404) {
+			callback(JSON.parse(response.responseText))
+		}
+	})
+}
+
+function buildProjectHTML(name, url, description) {
 	var content = ''
-	content += '<a class=repo href=' + html_url + ' target=_blank>'
+	content += '<a class=repo href=' + url + ' target=_blank>'
 	content += '  <p class=name>'
 	content +=      name
 	content += '  </p>'
@@ -48,58 +57,52 @@ function buildRepo(name, html_url, description) {
 	return content
 }
 
-function showRepos (repos, pages) {
-	repos = JSON.parse(repos)
-
-	if (!repos) return
+function populateProjects(repos, pages) {
+	if (!repos ) return
 
 	var content = ''
 
 	for (var i = 0; i < repos.length; i++) {
 		var repo = repos[i]
 
-		for (var j = 0; j < pages.length; j++) {
-			if (pages[j].key === repo.name) {
-				Object.assign(repo, pages[j])
-				continue
+		var name = repo.name.replace('-', ' ').toUpperCase()
+		var url = repo.html_url
+		var desc = repo.description || 'no description available'
+
+		if (repo.name.toLowerCase() === 'pepebecker.github.io') {
+			name = 'THIS WEBSITE'
+			desc = 'This repository contains the source code of this website'
+		} else if (repo.has_pages) {
+			const host = window.location.hostname
+			if (host === 'localhost' || host === '127.0.0.1') {
+				url = 'http://localhost/~Pepe/' + repo.name
+			} else {
+				url = host + '/' + repo.name
 			}
 		}
 
-		repo.name = repo.name.replace('-', ' ').toUpperCase()
-		repo.description = repo.description || 'no description available'
-
-		content += buildRepo(repo.name, repo.html_url, repo.description)
+		content += buildProjectHTML(name, url, desc)
 	}
 
-	for (var i = 0; i < pages.length; i++) {
-		if (!pages[i].key) {
-			content += buildRepo(pages[i].name, pages[i].html_url, pages[i].description)
-		}
+	for (let i = 0; i < pages.length; i++) {
+		content += buildProjectHTML(pages[i].name, pages[i].html_url, pages[i].description)
 	}
 
-	return document.querySelector("#repos").innerHTML = content
+	document.querySelector('#repos').innerHTML = content
 }
 
 (function () {
-	xhr('GET', 'json/pages.json', function (response) {
-		var pages = JSON.parse(response.responseText)
-		if (response.status !== 404) {
-			showRepos(localStorage.getItem('repos'), pages)
-			checkIfUpToDate(function (up2date) {
-				if (up2date) {
-					console.log('Everything is up to date')
-					var repos = localStorage.getItem('repos')
-					showRepos(repos, pages)
-				} else {
-					console.log('Requesting repos from server')
-					getRepos(function (repos) {
-						if (JSON.parse(repos)) {
-							localStorage.setItem('repos', repos)
-							showRepos(repos, pages)
-						}
-					})
-				}
-			})
-		}
+	getPages(function (pages) {
+		var repos = JSON.parse(localStorage.getItem('repos'))
+		populateProjects(repos, pages)
+		checkIfUpToDate(function (up2date) {
+			if (!up2date) {
+				console.log('Requesting repos from server')
+				getRepos(function (repos) {
+					localStorage.setItem('repos', JSON.stringify(repos))
+					populateProjects(repos, pages)
+				})
+			}
+		})
 	})
 })()

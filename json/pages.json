@@ -1,33 +1,12 @@
 [
 	{
-		"name": "Mo Dimes Music",
+		"name": "MO DIMES MUSIC",
 		"description": "Mo Dimes Music Official Website",
 		"html_url": "http://modimesmusic.com/"
 	},
 	{
-		"name": "iBreed Dogs",
+		"name": "iBREED DOGS",
 		"description": "iBreed puts your Kennel in your pocket<br>Available on the App Store",
 		"html_url": "https://itunes.apple.com/us/app/ibreed-dogs/id1046382842?ls=1&mt=8"
-	},
-	{
-		"key": "pepebecker.github.io",
-		"name": "This Website",
-		"description": "This repository contains the source code of this website"
-	},
-	{
-		"key": "car-game",
-		"html_url": "http://pepebecker.com/car-game/"
-	},
-	{
-		"key": "circle-intersection",
-		"html_url": "http://pepebecker.com/circle-intersection/"
-	},
-	{
-		"key": "java-blocks",
-		"html_url": "http://pepebecker.com/java-blocks/"
-	},
-	{
-		"key": "wizard-amigos",
-		"html_url": "http://pepebecker.com/wizard-amigos/"
 	}
 ]
