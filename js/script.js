@@ -84,7 +84,7 @@ function populateProjects(repos, pages) {
 		content += buildProjectHTML(name, url, desc)
 	}
 
-	for (let i = 0; i < pages.length; i++) {
+	for (var i = 0; i < pages.length; i++) {
 		content += buildProjectHTML(pages[i].name, pages[i].html_url, pages[i].description)
 	}
 
