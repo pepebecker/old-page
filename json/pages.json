@@ -10,16 +10,20 @@
 		"html_url": "https://itunes.apple.com/us/app/ibreed-dogs/id1046382842?ls=1&mt=8"
 	},
 	{
-		"repo": "pepebecker.github.io",
+		"key": "pepebecker.github.io",
 		"name": "This Website",
 		"description": "This repository contains the source code of this website"
 	},
 	{
-		"repo": "car-game",
+		"key": "car-game",
 		"html_url": "http://pepebecker.com/car-game/"
 	},
 	{
-		"repo": "java-blocks",
+		"key": "wizard-amigos",
+		"html_url": "http://pepebecker.com/wizard-amigos/"
+	},
+	{
+		"key": "java-blocks",
 		"html_url": "http://pepebecker.com/java-blocks/"
 	}
 ]

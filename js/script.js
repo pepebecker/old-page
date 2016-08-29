@@ -1,29 +1,3 @@
-var pages = [
-	{
-		"name": "MO DIMES MUSIC",
-		"description": "Mo Dimes Music Official Website",
-		"html_url": "http://modimesmusic.com/"
-	},
-	{
-		"name": "iBREED DOGS",
-		"description": "iBreed puts your Kennel in your pocket<br>Available on the App Store",
-		"html_url": "https://itunes.apple.com/us/app/ibreed-dogs/id1046382842?ls=1&mt=8"
-	},
-	{
-		"key": "pepebecker.github.io",
-		"name": "This Website",
-		"description": "This repository contains the source code of this website",
-	},
-	{
-		"key": "car-game",
-		"html_url": "http://pepebecker.com/car-game/"
-	},
-	{
-		"key": "wizard-amigos",
-		"html_url": "http://pepebecker.com/wizard-amigos/"
-	}
-]
-
 var xhr = function (method, url, callback) {
 	var xhr = new XMLHttpRequest()
 	xhr.open(method, url, true)
@@ -74,7 +48,7 @@ function buildRepo(name, html_url, description) {
 	return content
 }
 
-function showRepos (repos) {
+function showRepos (repos, pages) {
 	repos = JSON.parse(repos)
 
 	if (!repos) return
@@ -107,18 +81,23 @@ function showRepos (repos) {
 }
 
 (function () {
-	showRepos(localStorage.getItem('repos'))
-	checkIfUpToDate(function (up2date) {
-		if (up2date) {
-			console.log('Everything is up to date')
-			var repos = localStorage.getItem('repos')
-			showRepos(repos)
-		} else {
-			console.log('Requesting repos from server')
-			getRepos(function (repos) {
-				if (JSON.parse(repos)) {
-					localStorage.setItem('repos', repos)
-					showRepos(repos)
+	xhr('GET', 'json/pages.json', function (response) {
+		var pages = JSON.parse(response.responseText)
+		if (response.status !== 404) {
+			showRepos(localStorage.getItem('repos'), pages)
+			checkIfUpToDate(function (up2date) {
+				if (up2date) {
+					console.log('Everything is up to date')
+					var repos = localStorage.getItem('repos')
+					showRepos(repos, pages)
+				} else {
+					console.log('Requesting repos from server')
+					getRepos(function (repos) {
+						if (JSON.parse(repos)) {
+							localStorage.setItem('repos', repos)
+							showRepos(repos, pages)
+						}
+					})
 				}
 			})
 		}
