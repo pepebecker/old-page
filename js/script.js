@@ -65,7 +65,7 @@ function populateProjects(repos, pages) {
 	for (var i = 0; i < repos.length; i++) {
 		var repo = repos[i]
 
-		var name = repo.name.replace('-', ' ').toUpperCase()
+		var name = repo.name.replace(/-/g, ' ').toUpperCase()
 		var url = repo.html_url
 		var desc = repo.description || 'no description available'
 
