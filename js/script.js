@@ -96,7 +96,6 @@ function populateProjects(repos, pages) {
 		if (response.status !== 404) {
 			var data = JSON.parse(response.responseText)
 			document.querySelector('#about').innerHTML = data.bio
-			document.querySelector('#profile').src = data.avatar_url
 		}
 	})
 
