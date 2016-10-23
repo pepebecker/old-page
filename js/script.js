@@ -95,7 +95,8 @@ function populateProjects(repos, pages) {
 	xhr('GET', 'https://api.github.com/users/pepebecker' + extension, function (response) {
 		if (response.status !== 404) {
 			var data = JSON.parse(response.responseText)
-			document.querySelector('#about').innerHTML = data.bio
+			if (data.bio !== undefined)
+				document.querySelector('#about').innerHTML = data.bio
 		}
 	})
 
