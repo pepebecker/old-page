@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GitHub</title>
+</head>
+<body>
+	<script type="text/javascript">
+		window.location = 'https://github.com/pepebecker'
+	</script>
+</body>
+</html>

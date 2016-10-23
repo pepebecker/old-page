@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Twitter</title>
+</head>
+<body>
+	<script type="text/javascript">
+		window.location = 'https://twitter.com/pepebeckerr'
+	</script>
+</body>
+</html>
