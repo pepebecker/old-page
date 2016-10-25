@@ -20,7 +20,8 @@ header {
 }
 
 a, a:focus {
-  color: #008eee;
+  /*color: #008eee;*/
+  color: #7E8EB7;
   text-decoration: none;
 }
 
@@ -44,10 +45,11 @@ ul {
   margin: 1em;
   width: 200px;
   height: 200px;
-  border-radius: 100px;
+  /*border-radius: 100px;*/
 }
 
 #about {
+  color: #572B11;
   font-size: 1.4em;
   margin-bottom: 1em;
 }
@@ -64,17 +66,20 @@ ul {
   width: 200px;
   height: 120px;
   background: white;
-  box-shadow: 0 2px 1px rgba(170, 170, 170, 0.25);
+  /*box-shadow: 0 2px 1px rgba(170, 170, 170, 0.25);*/
+  box-shadow: 0 2px 5px rgba(87, 43, 17, 0.25);
   flex-grow: 1;
   overflow: hidden;
 }
 
 .repo:hover {
-  box-shadow: 0 0 1px 2px rgba(170, 170, 170, 0.25);
+  /*box-shadow: 0 0 1px 2px rgba(170, 170, 170, 0.25);*/
+  box-shadow: 0 0 5px 2px rgba(87, 43, 17, 0.25);
 }
 
 .repo > .name {
-  color: black;
+  /*color: black;*/
+  color: #572B11;
   margin-top: 35px;
   transition: all 0.5s;
   letter-spacing: 0.04em;
@@ -85,7 +90,8 @@ ul {
 }
 
 .repo > .description {
-  color: #6e6e6e;
+  /*color: #6e6e6e;*/
+  color: #572B11;
   opacity: 0;
   transition: all 0.5s;
 }
