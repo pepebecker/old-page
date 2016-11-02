@@ -4,6 +4,10 @@
   font-family: 'Raleway', sans-serif;
 }
 
+#preload_cv_hover {
+  background: url(../img/cv-hover.png);
+}
+
 body {
   font-family: Helvetica, sans-serif;
   color: #6e6e6e;
