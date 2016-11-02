@@ -48,7 +48,7 @@ ul {
   /*border-radius: 100px;*/
 }
 
-#about {
+#about, #intro {
   color: #572B11;
   font-size: 1.4em;
   margin-bottom: 1em;
