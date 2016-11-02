@@ -41,6 +41,18 @@ ul {
   font-size: 2em;
 }
 
+#link_cv {
+  background: url(../img/cv.png);
+  background-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+#link_cv:hover {
+  background: url(../img/cv-hover.png);
+  background-size: 28px;
+}
+
 #profile {
   margin: 1em;
   width: 200px;
