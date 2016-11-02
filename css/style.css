@@ -6,6 +6,7 @@
 
 #preload_cv_hover {
   background: url(../img/cv-hover.png);
+  display: none;
 }
 
 body {
