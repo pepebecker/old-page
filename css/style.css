@@ -1,7 +1,9 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
+@import 'https://fonts.googleapis.com/css?family=Rubik:300';
 
 * {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
 }
 
 #preload_cv_hover {
