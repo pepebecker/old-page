@@ -58,9 +58,12 @@
 		<div id="repos">
 		</div>
 		<footer>
-			&copy; 2016 Pepe Becker
+			&copy; <span id="copy-date">2018</span> Pepe Becker
 		</footer>
 		<script type="text/javascript" src="js/script.js"></script>
+		<script type="text/javascript">
+			document.querySelector('#copy-date').innerHTML = (new Date()).getFullYear()
+		</script>
 		<!--Start of Tawk.to Script-->
 		<!-- <script type="text/javascript">
 			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
