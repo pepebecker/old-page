@@ -20,32 +20,28 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 	</head>
 	<body>
-		<div id="preload_cv_hover"></div>
+		<div id="preload_gpg_hover"></div>
 		<header>
 			<img id="profile" src="img/profile.png" alt="Picture of Pepe Becker">
 			<p id="about">Hi, I'm Pepe Becker, a software developer based in Berlin.</p>
 			<ul id="links">
 				<li>
-					<a href="mailto:mail@pepebecker.com">
+					<a href="mailto:Pepe Becker <mail@pepebecker.com>">
 						<i class="fa fa-envelope-o" title="Drop me a line"></i>
 					</a>
-				</li>
-				<li>
+				</li><li>
+					<a href="keys/pepebecker.asc">
+						<div id="link_gpg" title="Let's keep our conversations secure"></div>
+					</a>
+				</li><li>
 					<a href="https://github.com/pepebecker" target="_blank">
 						<i class="fa fa-github" title="Checkout my open source projects"></i>
 					</a>
-				</li>
-				<li>
-					<a href="http://stackoverflow.com/cv/pepebecker" target="_blank">
-						<div id="link_cv" title="Do you need help in your organization?"></div>
-					</a>
-				</li>
-				<li>
+				</li><li>
 					<a href="https://twitter.com/pepebeckerr" target="_blank">
 						<i class="fa fa-twitter" title="Follow me on Twitter"></i>
 					</a>
-				</li>
-				<li>
+				</li><li>
 					<a href="https://www.linkedin.com/in/pepebecker" target="_blank">
 						<i class="fa fa-linkedin" title="Are you interested in collaboration?"></i>
 					</a>
@@ -63,17 +59,17 @@
 			document.querySelector('#copy-date').innerHTML = (new Date()).getFullYear()
 		</script>
 		<!--Start of Tawk.to Script-->
-		<!-- <script type="text/javascript">
-			var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-			(function(){
-				var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-				s1.async=true;
-				s1.src='https://embed.tawk.to/579f34cc360c8e7a68c835d8/default';
-				s1.charset='UTF-8';
-				s1.setAttribute('crossorigin','*');
-				s0.parentNode.insertBefore(s1,s0);
-			})();
-		</script> -->
+		<script type="text/javascript">
+		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+		(function(){
+		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+		s1.async=true;
+		s1.src='https://embed.tawk.to/58ed3258f7bbaa72709c5bfa/default';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
+		})();
+		</script>
 		<!--End of Tawk.to Script-->
 	</body>
 </html>

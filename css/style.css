@@ -6,9 +6,15 @@
   font-weight: 300;
 }
 
-#preload_cv_hover {
-  background: url(../img/cv-hover.png);
-  display: none;
+li a {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#preload_gpg_hover {
+  background: url(../img/gpg-hover.png);
+  width: 0px;
+  height: 0px;
 }
 
 body {
@@ -26,8 +32,7 @@ header {
   margin-top: 1em;
 }
 
-a, a:focus {
-  /*color: #008eee;*/
+a, a:focus, a:active {
   color: #7E8EB7;
   text-decoration: none;
 }
@@ -48,23 +53,26 @@ ul {
   font-size: 2em;
 }
 
-#link_cv {
-  background: url(../img/cv.png);
+#link_gpg {
+  background: url(../img/gpg.png);
   background-size: 28px;
   width: 28px;
   height: 28px;
 }
 
-#link_cv:hover {
-  background: url(../img/cv-hover.png);
+#link_gpg:hover {
+  background: url(../img/gpg-hover.png);
   background-size: 28px;
+}
+
+#link_gpg:focus {
+  outline: none;
 }
 
 #profile {
   margin: 1em;
   width: 200px;
   height: 200px;
-  /*border-radius: 100px;*/
 }
 
 #about, #intro {
@@ -85,19 +93,16 @@ ul {
   width: 200px;
   height: 120px;
   background: white;
-  /*box-shadow: 0 2px 1px rgba(170, 170, 170, 0.25);*/
   box-shadow: 0 2px 5px rgba(87, 43, 17, 0.25);
   flex-grow: 1;
   overflow: hidden;
 }
 
 .repo:hover {
-  /*box-shadow: 0 0 1px 2px rgba(170, 170, 170, 0.25);*/
   box-shadow: 0 0 5px 2px rgba(87, 43, 17, 0.25);
 }
 
 .repo > .name {
-  /*color: black;*/
   color: #572B11;
   margin-top: 35px;
   transition: all 0.5s;
@@ -109,7 +114,6 @@ ul {
 }
 
 .repo > .description {
-  /*color: #6e6e6e;*/
   color: #572B11;
   opacity: 0;
   transition: all 0.5s;
