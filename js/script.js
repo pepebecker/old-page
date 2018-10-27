@@ -44,51 +44,51 @@ function getPages (callback) {
 	})
 }
 
-function buildProjectHTML(name, url, description) {
-	var content = ''
-	content += '<a class=repo href=' + url + ' target=_blank>'
-	content += '  <p class=name>'
-	content +=      name
-	content += '  </p>'
-	content += '  <p class=description>'
-	content +=      description
-	content += '  </p>'
-	content += '</a>'
-	return content
+function createRepoElement(name, url, description) {
+	var repoElement = document.createElement('a')
+	repoElement.classList.add('repo')
+	repoElement.setAttribute('href', url)
+	repoElement.setAttribute('target', '_blank')
+
+	var nameElement = document.createElement('p')
+	nameElement.classList.add('name')
+	nameElement.appendChild(document.createTextNode(name))
+	repoElement.appendChild(nameElement)
+
+	var descriptionElement = document.createElement('p')
+	descriptionElement.classList.add('description')
+	descriptionElement.appendChild(document.createTextNode(description))
+	repoElement.appendChild(descriptionElement)
+
+	return repoElement
 }
 
 function populateProjects(repos, pages) {
 	if (!repos ) return
 
-	var content = ''
+	var reposElement = document.querySelector('#repos')
 
 	for (var i = 0; i < repos.length; i++) {
 		var repo = repos[i]
+
+		if (repo.name.toLowerCase() === 'pepebecker.github.io') {
+			continue
+		}
 
 		var name = repo.name.replace(/-/g, ' ').toUpperCase()
 		var url = repo.html_url
 		var desc = repo.description || 'no description available'
 
-		if (repo.name.toLowerCase() === 'pepebecker.github.io') {
-			name = 'THIS WEBSITE'
-			desc = 'This repository contains the source code of this website'
-		} else if (repo.has_pages) {
-			const host = window.location.hostname
-			if (host === 'localhost' || host === '127.0.0.1') {
-				url = 'http://localhost/~Pepe/' + repo.name
-			} else {
-				url = '//' + host + '/' + repo.name
-			}
+		if (repo.homepage) {
+			url = repo.homepage
 		}
 
-		content += buildProjectHTML(name, url, desc)
+		reposElement.appendChild(createRepoElement(name, url, desc))
 	}
 
 	for (var i = 0; i < pages.length; i++) {
-		content += buildProjectHTML(pages[i].name, pages[i].html_url, pages[i].description)
+		reposElement.appendChild(createRepoElement(pages[i].name, pages[i].html_url, pages[i].description))
 	}
-
-	document.querySelector('#repos').innerHTML = content
 }
 
 (function () {
