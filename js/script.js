@@ -12,7 +12,7 @@ var xhr = function (method, url, callback) {
 var domain = 'https://api.github.com/users/pepebecker/repos'
 var client_id = 'a5bd048689d32854df86'
 var client_secret = '1c1d268c1f65b2322b1c6be1760d606c52b654a9'
-var extension = '?client_id=' + client_id + '&client_secret=' + client_secret
+var extension = '?client_id=' + client_id + '&client_secret=' + client_secret + '&per_page=1000'
 var url = domain + extension
 
 function checkIfUpToDate (callback) {
